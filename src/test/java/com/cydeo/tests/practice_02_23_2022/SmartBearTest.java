@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -72,6 +73,41 @@ public class SmartBearTest {
             Assert.assertTrue(eachBox.isSelected());
             //System.out.println(eachBox.isSelected());
         }
+    }
+
+    @Test
+    public void radioButtonTest(){
+//        7-  Locate and Click “Order”
+        WebElement order = driver.findElement(By.xpath("//a[.='Order']"));
+        order.click();
+
+//        8-  Locate and click “Visa” radio button
+        WebElement visaButton = driver.findElement(By.id("ctl00_MainContent_fmwOrder_cardList_0"));
+        visaButton.click();
+
+//        9-  Verify “Visa” radio button is selected
+        //System.out.println(visaButton.isSelected());
+        Assert.assertTrue(visaButton.isSelected());
+
+    }
+
+    @Test
+    public void dropDownTest(){
+//        7-  Locate and Click “Order”
+        WebElement order = driver.findElement(By.xpath("//a[.='Order']"));
+        order.click();
+
+//        8-  Locate Product dropdown and Select FamilyAlbum
+        WebElement product = driver.findElement(By.id("ctl00_MainContent_fmwOrder_ddlProduct"));
+        Select select = new Select(product);
+        select.selectByVisibleText("FamilyAlbum");
+
+//        9-  Verify selected option is FamilyAlbum
+        String expectedOption = "FamilyAlbum";
+        String actualOption= select.getFirstSelectedOption().getText();
+
+        Assert.assertEquals(actualOption,expectedOption,"FamilyAlbum option did not selected!");
+
     }
 
 
