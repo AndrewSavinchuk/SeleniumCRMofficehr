@@ -2,12 +2,19 @@ package com.cydeo.tests.practice_02_23_2022;
 
 import com.cydeo.utilities.WebDriverFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import static org.testng.Assert.assertEquals;
 
+import javax.swing.*;
+
+import static org.testng.Assert.*;
+
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class SmartBearTest {
@@ -26,10 +33,10 @@ public class SmartBearTest {
 
         driver.get(appUrl);
 
-        String expectedTitle= "Web Orders Login";
-        String actualTitle=driver.getTitle();
+        String expectedTitle= "Web Orders Login"; // required title from documentation
+        String actualTitle=driver.getTitle(); // it is coming from selenium
 
-        assertEquals(actualTitle,expectedTitle,"Before login title did not match!");
+        Assert.assertEquals(actualTitle,expectedTitle,"Before login title did not match!");
 
         driver.findElement(By.id("ctl00_MainContent_username")).sendKeys(userName);
         driver.findElement(By.id("ctl00_MainContent_password")).sendKeys(password);
@@ -46,8 +53,30 @@ public class SmartBearTest {
 
     }
 
+    @Test
+    public void checkBoxTest(){
+//       7. Locate and click checkbox button for Paul Brown
+        WebElement paulBox = driver.findElement(By.id("ctl00_MainContent_orderGrid_ctl02_OrderSelector"));
+        paulBox.click();
+
+//        8- Verify Paul Brown checkbox is selected
+        Assert.assertTrue(paulBox.isSelected());
+        System.out.println(paulBox.isSelected());
+        paulBox.click();
+
+//        9- Click checkbox button for All
+   //     10- Verify All checkbox is selected.
+        List<WebElement> boxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
+        for(WebElement eachBox : boxes){
+            eachBox.click();
+            Assert.assertTrue(eachBox.isSelected());
+            //System.out.println(eachBox.isSelected());
+        }
+    }
+
+
     @AfterMethod
     public void teardown(){
-        driver.close();
+       // driver.close();
     }
 }
