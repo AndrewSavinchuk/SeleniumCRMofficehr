@@ -4,6 +4,7 @@ import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.CRM_Utilities;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.WebDriverFactory;
+import com.google.common.base.Verify;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -51,7 +52,27 @@ public class CRM_SendingMessages {
 
 //        Verify the message is displayed on the feed
         WebElement feed= driver.findElement(By.xpath("//div[starts-with(@id,'blog_post_body')]"));
-        Assert.assertEquals(feed.getText(),"Hello!","Message did not appear!");
+        String expectedText="Hello!";
+        String actualText=feed.getText();
+        Assert.assertEquals(actualText,expectedText,"Message did not appear!");
+
+    }
+
+    @Test
+    public void emptyMessageTest(){
+
+//        Users are on the homepage
+//        Users click the MESSAGE tab
+        driver.findElement(By.id("feed-add-post-form-tab-message")).click();
+
+//        Users click the SEND button
+        driver.findElement(By.id("blog-submit-button-save")).click();
+
+//        Verify “The message title is not specified” warning message is displayed on the page
+        WebElement warningMsg=driver.findElement(By.xpath("//span[.='The message title is not specified']"));
+        String expectedText="The message title is not specified";
+        String actualText=warningMsg.getText();
+        Assert.assertEquals(actualText,expectedText,"Warning Message did not appear!");
 
     }
 
