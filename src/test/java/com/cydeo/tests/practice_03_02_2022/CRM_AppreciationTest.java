@@ -3,6 +3,7 @@ package com.cydeo.tests.practice_03_02_2022;
 import com.cydeo.utilities.CRM_Utilities;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.WebDriverFactory;
+import com.google.common.base.Verify;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -29,7 +30,12 @@ public class CRM_AppreciationTest {
     }
 
     @Test
-    public void sendingMessagesTest(){
+    public void sendingAppreciationMsgTest(){
+//        Users are on the homepage
+//        Users click MORE tab and select APPRECIATION
 
+//        Users write an Appreciation message
+//        Users click the SEND button
+//        Verify the Appreciation is displayed on the feed
     }
 }
