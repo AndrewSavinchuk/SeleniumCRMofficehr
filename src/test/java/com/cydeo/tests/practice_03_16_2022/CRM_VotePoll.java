@@ -1,4 +1,4 @@
-package com.cydeo.tests.practice_03_02_2022;
+package com.cydeo.tests.practice_03_16_2022;
 
 import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.CRM_Utilities;
@@ -19,6 +19,7 @@ import static org.testng.Assert.assertTrue;
 public class CRM_VotePoll {
 
     WebDriver driver;
+    JavascriptExecutor js = (JavascriptExecutor) driver;
 
     @BeforeMethod
     public void setupMethod() {
@@ -39,23 +40,23 @@ public class CRM_VotePoll {
     @Test
     public void Vote() {
 
-            WebElement optionButton = driver.findElement(By.xpath("//label[.='JAVA']"));
+        WebElement optionButton = driver.findElement(By.xpath("//label[.='Java']"));
+        BrowserUtils.sleep(3);
 
-            BrowserUtils.sleep(3);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", optionButton);
-       optionButton.click();
-           BrowserUtils.sleep(3);
+        js.executeScript("arguments[0].scrollIntoView(true);", optionButton);
+        optionButton.click();
+        BrowserUtils.sleep(3);
 
-            WebElement voteButton = driver.findElement(By.xpath("(//button[.='Vote'])[1]"));
-
-            BrowserUtils.sleep(3);
-       ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", voteButton);
-
+        WebElement voteButton = driver.findElement(By.xpath("(//button[.='Vote'])[1]"));
+        BrowserUtils.sleep(3);
+        js.executeScript("arguments[0].scrollIntoView(true);", voteButton);
         voteButton.click();
-            BrowserUtils.sleep(3);
-       WebElement voteAgainButton = driver.findElement(By.xpath("(//button[.='Vote again'])[1]"));
-            BrowserUtils.sleep(3);
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", voteAgainButton);
+
+        BrowserUtils.sleep(3);
+        WebElement voteAgainButton = driver.findElement(By.xpath("(//button[.='Vote again'])[1]"));
+        BrowserUtils.sleep(3);
+        js.executeScript("arguments[0].scrollIntoView(true);", voteAgainButton);
+
         assertTrue(voteAgainButton.isDisplayed());
 
         voteAgainButton.click();
